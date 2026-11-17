@@ -1,89 +1,99 @@
-# Week 5 – Security Enhancements in Python Applications
+# Week 6 – Continuous Integration (CI) in Python Projects
 
 ## Project Overview
-This project demonstrates security improvements in a Python-based Student Management Application. It provides user registration, secure login, and student record management using SQLite.
 
-## Features
-- Secure password hashing using bcrypt.
-- Password verification.
-- Username and password validation.
-- Student name, email, and age validation.
-- Parameterized SQL queries to prevent SQL injection.
-- SQLite database with unique constraints.
-- Automated unit testing.
-- Security scanning using Bandit.
-- Dependency vulnerability scanning using pip-audit.
+This project demonstrates the implementation of Continuous Integration (CI) in a Python application using GitHub Actions. It automates code quality checks and unit testing whenever changes are pushed to the GitHub repository.
+
+## Objectives
+
+- Implement an automated CI pipeline.
+- Execute Python unit tests automatically.
+- Perform code quality checks using Flake8.
+- Generate test and code coverage reports.
+- Upload test reports as GitHub Actions artifacts.
 
 ## Technologies Used
+
 - Python 3.14
+- Git and GitHub
+- GitHub Actions
+- Pytest
+- Pytest-Cov
+- Flake8
 - SQLite
 - bcrypt
-- unittest
-- Bandit
-- pip-audit
 
 ## Project Structure
+
 ```text
-Week5_Security_Enhancements/
-├── README.md
-├── requirements.txt
+Week6_CI_Integration/
+├── .github/
+│   └── workflows/
+│       └── python-ci.yml
 ├── reports/
-│   └── Week5_Security_Audit_Report.docx
 ├── secure_app/
-│   ├── __init__.py
-│   ├── main.py
 │   ├── database.py
+│   ├── main.py
 │   ├── security.py
 │   └── validators.py
-└── tests/
-    ├── test_application.py
-    └── test_security.py
+├── tests/
+│   ├── test_application.py
+│   └── test_security.py
+├── .gitignore
+├── requirements.txt
+└── README.md
 ```
 
-## Installation
+## CI Pipeline
 
-Install the dependencies:
+The GitHub Actions workflow performs the following steps:
+
+1. Checks out the source code.
+2. Sets up Python 3.14.
+3. Installs project dependencies.
+4. Checks code quality using Flake8.
+5. Executes automated tests using Pytest.
+6. Generates XML test and coverage reports.
+7. Uploads reports as workflow artifacts.
+
+## Running Locally
+
+Install dependencies:
 
 ```bash
-py -m pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
-## Run the Application
+Run code quality checks:
 
 ```bash
-py -m secure_app.main
+python -m flake8 secure_app tests --count --show-source --statistics
 ```
 
-## Run Unit Tests
+Run automated tests:
 
 ```bash
-py -m unittest discover -s tests -v
+python -m pytest tests -v
 ```
 
-## Security Audit Commands
-
-Run Bandit:
+Generate coverage reports:
 
 ```bash
-py -m bandit -r secure_app
+python -m pytest tests -v --cov=secure_app --cov-report=term --cov-report=xml:reports/coverage.xml
 ```
 
-Run dependency audit:
+## Test Results
 
-```bash
-py -m pip_audit
-```
+- Total automated tests: 14
+- Passed tests: 14
+- Failed tests: 0
+- Flake8 errors: 0
+- Overall code coverage: 38%
 
-## Security Testing Results
+## GitHub Repository
 
-- Unit tests: 14 passed.
-- Bandit: No issues identified.
-- pip-audit: No known vulnerabilities found after upgrading Pillow to 13.0.0.
+https://github.com/Logendra-07/Week6-CI-Integration
 
 ## Conclusion
 
-The project applies important Python application security practices, including password hashing, input validation, parameterized SQL queries, and dependency vulnerability checking. All 14 automated tests passed, and the final security scans reported no known issues.
-
-## Author
-Logendra Prabhu V"# Week5-Security-Enhancements" 
-"# Week6-CI-Integration" 
+This project demonstrates how Continuous Integration improves software development by automating testing and code
